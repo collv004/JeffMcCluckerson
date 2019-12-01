@@ -30,6 +30,7 @@ public class ChickenControllerCC : MonoBehaviour
 
     public CameraFollow cameraAudio;
     AudioSource bgMusic;
+    AudioSource jumpSound;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,7 @@ public class ChickenControllerCC : MonoBehaviour
         anim = GetComponent<Animator>();
         startTime = Time.time;
 
+        jumpSound = GetComponent<AudioSource>();
         bgMusic = cameraAudio.GetComponent<AudioSource>();
         StartCoroutine(AudioController.FadeIn(bgMusic, 3.5f)); // fade in background song
     }
@@ -76,6 +78,7 @@ public class ChickenControllerCC : MonoBehaviour
                 verticalVelocity = jumpSpeed;
                 anim.SetTrigger("jump");
                 Invoke("resetisJumping", 1.6f);
+                jumpSound.Play();
             }
         }
         else
